@@ -10,7 +10,7 @@ import Foundation
 struct Budget: Codable, Identifiable {
     let id: Int
     let description: String
-    let ammount: Int
+    let amount: Int
     let addedDate: Date
     let budgetType: BudgetType
 }
