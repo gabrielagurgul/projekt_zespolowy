@@ -36,6 +36,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		50DF9A91275FC3DC00DA8637 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				50FB12E2275CFA8C0033F057 /* ContentView.swift */,
+				50FB12EE275D07510033F057 /* CategoryView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		50DF9A92275FC3E300DA8637 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		50DF9A93275FC3E700DA8637 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		50FB12D4275CFA8C0033F057 = {
 			isa = PBXGroup;
 			children = (
@@ -55,11 +78,12 @@
 		50FB12DF275CFA8C0033F057 /* TeamProject */ = {
 			isa = PBXGroup;
 			children = (
+				50DF9A93275FC3E700DA8637 /* ViewModel */,
+				50DF9A92275FC3E300DA8637 /* Model */,
+				50DF9A91275FC3DC00DA8637 /* View */,
 				50FB12E0275CFA8C0033F057 /* TeamProjectApp.swift */,
-				50FB12E2275CFA8C0033F057 /* ContentView.swift */,
 				50FB12E4275CFA8E0033F057 /* Assets.xcassets */,
 				50FB12E6275CFA8E0033F057 /* Preview Content */,
-				50FB12EE275D07510033F057 /* CategoryView.swift */,
 				50DF9A8F275FC12200DA8637 /* Api.swift */,
 			);
 			path = TeamProject;
