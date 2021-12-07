@@ -8,10 +8,20 @@
 import SwiftUI
 
 struct CategoryView: View {
+	@Environment(\.colorScheme) var colorScheme
     let budgetType: BudgetType
     var body: some View {
-        
-        Text(budgetType.type)
+        VStack {
+			Text(budgetType.type)
+				.font(.largeTitle)
+			Text("🍕")
+				.font(.system(size: 68))
+			
+		}
+		.frame(width: 160, height: 160)
+		.background(.regularMaterial)
+		.mask(RoundedRectangle(cornerRadius: 8))
+		.shadow(radius: 16)
     }
 }
 

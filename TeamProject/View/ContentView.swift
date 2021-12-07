@@ -8,17 +8,24 @@
 import SwiftUI
 
 struct ContentView: View {
-    var body: some View {
-        ScrollView {
-            ForEach(BudgetType.arrayOfBudgetTypes) { budgetType in
-                CategoryView(budgetType: budgetType)
-            }
-        }
-    }
+	let columns = [
+		GridItem(.flexible()),
+		GridItem(.flexible())
+	]
+	var body: some View {
+		ScrollView {
+			LazyVGrid(columns: columns, spacing: 48){
+				ForEach(BudgetType.arrayOfBudgetTypes) { budgetType in
+					CategoryView(budgetType: budgetType)
+				}
+			}
+		}
+	}
 }
 
 struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
+	static var previews: some View {
+		ContentView()
+		ContentView().preferredColorScheme(.dark)
+	}
 }
