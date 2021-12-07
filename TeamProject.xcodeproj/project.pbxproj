@@ -7,18 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		50DF9A90275FC12200DA8637 /* Api.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50DF9A8F275FC12200DA8637 /* Api.swift */; };
 		50FB12E1275CFA8C0033F057 /* TeamProjectApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FB12E0275CFA8C0033F057 /* TeamProjectApp.swift */; };
 		50FB12E3275CFA8C0033F057 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FB12E2275CFA8C0033F057 /* ContentView.swift */; };
 		50FB12E5275CFA8E0033F057 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 50FB12E4275CFA8E0033F057 /* Assets.xcassets */; };
 		50FB12E8275CFA8E0033F057 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 50FB12E7275CFA8E0033F057 /* Preview Assets.xcassets */; };
+		50FB12EF275D07510033F057 /* CategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FB12EE275D07510033F057 /* CategoryView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		50DF9A8F275FC12200DA8637 /* Api.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Api.swift; sourceTree = "<group>"; };
 		50FB12DD275CFA8C0033F057 /* TeamProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TeamProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		50FB12E0275CFA8C0033F057 /* TeamProjectApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamProjectApp.swift; sourceTree = "<group>"; };
 		50FB12E2275CFA8C0033F057 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		50FB12E4275CFA8E0033F057 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		50FB12E7275CFA8E0033F057 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		50FB12EE275D07510033F057 /* CategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +59,8 @@
 				50FB12E2275CFA8C0033F057 /* ContentView.swift */,
 				50FB12E4275CFA8E0033F057 /* Assets.xcassets */,
 				50FB12E6275CFA8E0033F057 /* Preview Content */,
+				50FB12EE275D07510033F057 /* CategoryView.swift */,
+				50DF9A8F275FC12200DA8637 /* Api.swift */,
 			);
 			path = TeamProject;
 			sourceTree = "<group>";
@@ -139,6 +145,8 @@
 			files = (
 				50FB12E3275CFA8C0033F057 /* ContentView.swift in Sources */,
 				50FB12E1275CFA8C0033F057 /* TeamProjectApp.swift in Sources */,
+				50DF9A90275FC12200DA8637 /* Api.swift in Sources */,
+				50FB12EF275D07510033F057 /* CategoryView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
