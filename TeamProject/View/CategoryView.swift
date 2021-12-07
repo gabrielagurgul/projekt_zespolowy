@@ -8,14 +8,15 @@
 import SwiftUI
 
 struct CategoryView: View {
-    let budgetType: String
+    let budgetType: BudgetType
     var body: some View {
-        Text(budgetType)
+        
+        Text(budgetType.type)
     }
 }
 
 struct CategoryView_Previews: PreviewProvider {
     static var previews: some View {
-        CategoryView(budgetType: "Makaron")
+        CategoryView(budgetType: BudgetType.budgetTypeMock)
     }
 }
