@@ -10,8 +10,8 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         ScrollView {
-            ForEach(1..<11) { _ in
-                Text("Hey")
+            ForEach(1..<11) { number in
+                CategoryView(budgetType: "\(number)")
             }
         }
     }
