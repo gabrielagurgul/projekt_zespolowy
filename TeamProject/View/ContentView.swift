@@ -18,12 +18,31 @@ struct ContentView: View {
 	var body: some View {
 		ScrollView {
 			LazyVGrid(columns: columns, spacing: 48){
-				ForEach(BudgetType.arrayOfBudgetTypes) { budgetType in
-					CategoryView(budgetType: budgetType)
+				ForEach(viewModel.budgetCategories) { budgetType in
+					if viewModel.hiddenTheSalaryAndBudget(budgetType.id) {
+						CategoryView(budgetType: budgetType)
+					}
 				}
 			}
 		}
+		.onAppear(perform: {viewModel.getCategories()})
+		.overlay(loadingOverlay)
 	}
+	
+	@ViewBuilder
+	private var loadingOverlay: some View {
+		if viewModel.isLoading {
+			ProgressView()
+				.progressViewStyle(CircularProgressViewStyle(tint: .blue))
+				.padding(50)
+				.background(.regularMaterial)
+				.mask(RoundedRectangle(cornerRadius: 8))
+				.overlay(alignment: .bottom) {
+					Text("Please wait")
+				}
+		}
+	}
+	
 }
 
 struct ContentView_Previews: PreviewProvider {

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct CategoryView: View {
 	@Environment(\.colorScheme) var colorScheme
+	
 	let budgetType: BudgetType
 	var body: some View {
 		VStack {

@@ -26,7 +26,7 @@ class BudgetFetcherImpl: BudgetFetcher {
 	}
 	
 	func getArrayOfBudgetType() async throws -> [BudgetType] {
-		let urlRequest = URLRequest(url: API.GET.listOfBudgetsType)
+		let urlRequest = URLRequest(url: API.GET.budgetTypeDescription)
 		let (data,_) = try await session.data(for: urlRequest)
 		guard let arrayOfBudgets = try? JSONDecoder().decode([BudgetType].self, from: data) else {
 			throw ApiError.InvalidDataDecoding
