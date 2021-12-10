@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5006B0112763935E007F60CB /* BudgetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5006B0102763935E007F60CB /* BudgetViewModel.swift */; };
+		5006B014276396CA007F60CB /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 5006B013276396CA007F60CB /* .gitignore */; };
 		5048876D275FF455008FD4F8 /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = 5048876C275FF455008FD4F8 /* SwiftUICharts */; };
 		5055A45927636EE900D874BE /* BudgetFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5055A45827636EE900D874BE /* BudgetFetcher.swift */; };
 		5055A45B2763730100D874BE /* CategoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5055A45A2763730100D874BE /* CategoryViewModel.swift */; };
@@ -21,6 +23,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5006B0102763935E007F60CB /* BudgetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetViewModel.swift; sourceTree = "<group>"; };
+		5006B013276396CA007F60CB /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		5055A45827636EE900D874BE /* BudgetFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetFetcher.swift; sourceTree = "<group>"; };
 		5055A45A2763730100D874BE /* CategoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewModel.swift; sourceTree = "<group>"; };
 		50DF9A8F275FC12200DA8637 /* Api.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Api.swift; sourceTree = "<group>"; };
@@ -69,6 +73,7 @@
 			isa = PBXGroup;
 			children = (
 				5055A45A2763730100D874BE /* CategoryViewModel.swift */,
+				5006B0102763935E007F60CB /* BudgetViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -76,6 +81,7 @@
 		50FB12D4275CFA8C0033F057 = {
 			isa = PBXGroup;
 			children = (
+				5006B013276396CA007F60CB /* .gitignore */,
 				50FB12DF275CFA8C0033F057 /* TeamProject */,
 				50FB12DE275CFA8C0033F057 /* Products */,
 			);
@@ -176,6 +182,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				50FB12E8275CFA8E0033F057 /* Preview Assets.xcassets in Resources */,
+				5006B014276396CA007F60CB /* .gitignore in Resources */,
 				50FB12E5275CFA8E0033F057 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -193,6 +200,7 @@
 				50FB12E1275CFA8C0033F057 /* TeamProjectApp.swift in Sources */,
 				5055A45B2763730100D874BE /* CategoryViewModel.swift in Sources */,
 				50DF9A95275FC46C00DA8637 /* Budget.swift in Sources */,
+				5006B0112763935E007F60CB /* BudgetViewModel.swift in Sources */,
 				50DF9A90275FC12200DA8637 /* Api.swift in Sources */,
 				50FB12EF275D07510033F057 /* CategoryView.swift in Sources */,
 			);

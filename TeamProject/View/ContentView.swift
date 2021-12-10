@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct ContentView: View {
+	
+	@EnvironmentObject var viewModel: BudgetViewModel
+	
 	let columns = [
 		GridItem(.flexible()),
 		GridItem(.flexible())
@@ -26,6 +29,8 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
 	static var previews: some View {
 		ContentView()
+			.environmentObject(BudgetViewModel(fetcher: BudgetFetcherImpl()))
 		ContentView().preferredColorScheme(.dark)
+			.environmentObject(BudgetViewModel(fetcher: BudgetFetcherImpl()))
 	}
 }

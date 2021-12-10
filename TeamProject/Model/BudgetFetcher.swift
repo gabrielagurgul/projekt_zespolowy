@@ -26,7 +26,12 @@ class BudgetFetcherImpl: BudgetFetcher {
 	}
 	
 	func getArrayOfBudgetType() async throws -> [BudgetType] {
-		return BudgetType.arrayOfBudgetTypes
+		let urlRequest = URLRequest(url: API.GET.listOfBudgetsType)
+		let (data,_) = try await session.data(for: urlRequest)
+		guard let arrayOfBudgets = try? JSONDecoder().decode([BudgetType].self, from: data) else {
+			throw ApiError.InvalidDataDecoding
+		}
+		return arrayOfBudgets
 	}
 	
 	func getArrayOfBudgetsOf(type: ID) async throws -> [Budget] {
@@ -58,5 +63,16 @@ extension BudgetFetcherImpl {
 		case PUT = "PUT"
 		case DELETE = "DELETE"
 		case POST = "POST"
+	}
+	
+	enum ApiError: Error, LocalizedError {
+		case InvalidDataDecoding
+		
+		var errorDescription: String? {
+			switch self {
+			case .InvalidDataDecoding:
+				return "Nie udało się przekonwertować danych otrzymanych od serwera"
+			}
+		}
 	}
 }
