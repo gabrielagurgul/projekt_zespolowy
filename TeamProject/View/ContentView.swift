@@ -16,17 +16,27 @@ struct ContentView: View {
 		GridItem(.flexible())
 	]
 	var body: some View {
-		ScrollView {
-			LazyVGrid(columns: columns, spacing: 48){
-				ForEach(viewModel.budgetCategories) { budgetType in
-					if viewModel.hiddenTheSalaryAndBudget(budgetType.id) {
-						CategoryView(budgetType: budgetType)
+		NavigationView {
+			ScrollView {
+				LazyVGrid(columns: columns, spacing: 48){
+					ForEach(viewModel.budgetCategories) { budgetType in
+						if viewModel.hiddenTheSalaryAndBudget(budgetType.id) {
+							NavigationLink {
+								CategoryDetailView(budgetType: budgetType)
+							} label: {
+								CategoryView(budgetType: budgetType)
+							}
+							.buttonStyle(PlainButtonStyle())
+						}
 					}
 				}
 			}
+			.navigationTitle("Analizator budżetu")
+			.onAppear(perform: {viewModel.getCategories()})
+			.overlay(loadingOverlay)
 		}
-		.onAppear(perform: {viewModel.getCategories()})
-		.overlay(loadingOverlay)
+		
+		
 	}
 	
 	@ViewBuilder
@@ -47,9 +57,11 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
 	static var previews: some View {
-		ContentView()
-			.environmentObject(BudgetViewModel(fetcher: BudgetFetcherImpl()))
-		ContentView().preferredColorScheme(.dark)
-			.environmentObject(BudgetViewModel(fetcher: BudgetFetcherImpl()))
+		NavigationView {
+			ContentView()
+				.environmentObject(BudgetViewModel(fetcher: BudgetFetcherImpl()))
+			ContentView().preferredColorScheme(.dark)
+				.environmentObject(BudgetViewModel(fetcher: BudgetFetcherImpl()))
+		}
 	}
 }
