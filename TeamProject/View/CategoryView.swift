@@ -9,20 +9,28 @@ import SwiftUI
 
 struct CategoryView: View {
 	@Environment(\.colorScheme) var colorScheme
-	
-	let budgetType: BudgetType
+	private let image: Image
+	private let name: String
 	var body: some View {
 		VStack {
-			Text(budgetType.type)
+			Text(name)
 				.font(.largeTitle)
-			Text("🍕")
-				.font(.system(size: 68))
+			image
+				.resizable()
+				.scaledToFit()
 			
 		}
 		.frame(width: 160, height: 160)
 		.background(.regularMaterial)
 		.mask(RoundedRectangle(cornerRadius: 8))
 		.shadow(radius: 16)
+	}
+}
+
+extension CategoryView {
+	init(budgetType: BudgetType) {
+		image = Image(budgetType.type.lowercased())
+		name = budgetType.type
 	}
 }
 
