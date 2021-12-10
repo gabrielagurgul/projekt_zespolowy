@@ -19,8 +19,11 @@ struct API {
         static let addBudget = URL(string: "https://webapi-nn.herokuapp.com/api/budget/add/")!
         static let availableCash = URL(string: "https://webapi-nn.herokuapp.com/api/availableCash")!
         static let unavailableTypeCash = URL(string: "https://webapi-nn.herokuapp.com/api/unavailableTypeCash")!
-        static let getPredictionByType = URL(string: "https://webapi-nn.herokuapp.com/api/prediction/")!
     }
+	
+	struct PUT {
+		static let getPredictionByType = URL(string: "https://webapi-nn.herokuapp.com/api/prediction/")!
+	}
     
     struct DELETE {
         static let deleteBudgetById = URL(string: "https://webapi-nn.herokuapp.com/api/budget/")!
