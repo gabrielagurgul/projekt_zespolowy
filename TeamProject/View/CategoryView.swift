@@ -9,9 +9,9 @@ import SwiftUI
 
 struct CategoryView: View {
 	@Environment(\.colorScheme) var colorScheme
-    let budgetType: BudgetType
-    var body: some View {
-        VStack {
+	let budgetType: BudgetType
+	var body: some View {
+		VStack {
 			Text(budgetType.type)
 				.font(.largeTitle)
 			Text("🍕")
@@ -22,11 +22,11 @@ struct CategoryView: View {
 		.background(.regularMaterial)
 		.mask(RoundedRectangle(cornerRadius: 8))
 		.shadow(radius: 16)
-    }
+	}
 }
 
 struct CategoryView_Previews: PreviewProvider {
-    static var previews: some View {
-        CategoryView(budgetType: BudgetType.budgetTypeMock)
-    }
+	static var previews: some View {
+		CategoryView(budgetType: BudgetType.budgetTypeMock)
+	}
 }
