@@ -10,7 +10,7 @@ import Foundation
 protocol BudgetFetcher {
 	typealias ID = Int
 	typealias PLN = Double
-	func getArrayOfBudgetType() async throws ->  [BudgetType]
+	func getArrayOfBudgetCategories() async throws ->  [BudgetType]
 	func getArrayOfBudgetsOf(type: ID) async throws -> [Budget]
 	func getBudgetBy(_ id: ID) async throws -> Budget
 	func getUserBudget() async throws -> PLN
@@ -25,13 +25,13 @@ class BudgetFetcherImpl: BudgetFetcher {
 		self.session = URLSession(configuration: .ephemeral)
 	}
 	
-	func getArrayOfBudgetType() async throws -> [BudgetType] {
+	func getArrayOfBudgetCategories() async throws -> [BudgetType] {
 		let urlRequest = URLRequest(url: API.GET.budgetTypeDescription)
 		let (data,_) = try await session.data(for: urlRequest)
-		guard let arrayOfBudgets = try? JSONDecoder().decode([BudgetType].self, from: data) else {
+		guard let arrayOfBudgetsCategories = try? JSONDecoder().decode([BudgetType].self, from: data) else {
 			throw ApiError.InvalidDataDecoding
 		}
-		return arrayOfBudgets
+		return arrayOfBudgetsCategories
 	}
 	
 	func getArrayOfBudgetsOf(type: ID) async throws -> [Budget] {

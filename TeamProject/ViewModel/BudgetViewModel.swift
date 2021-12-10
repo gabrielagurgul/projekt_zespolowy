@@ -22,7 +22,7 @@ class BudgetViewModel: ObservableObject {
 		task = Task {
 			isLoading = true
 			do {
-				budgetCategories = try await fetcher.getArrayOfBudgetType()
+				budgetCategories = try await fetcher.getArrayOfBudgetCategories()
 				
 			} catch let error {
 				print(error.localizedDescription)
