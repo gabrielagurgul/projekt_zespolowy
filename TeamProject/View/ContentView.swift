@@ -18,6 +18,14 @@ struct ContentView: View {
 	var body: some View {
 		NavigationView {
 			ScrollView {
+				Section("Finanse") {
+					ForEach(viewModel.budgetCategories) { budgetType in
+						if budgetType.id == 10 || budgetType.id == 11 {
+							CashView(budgetType: budgetType)
+								.padding(.horizontal)
+						}
+					}
+				}
 				LazyVGrid(columns: columns, spacing: 48){
 					ForEach(viewModel.budgetCategories) { budgetType in
 						if viewModel.hiddenTheSalaryAndBudget(budgetType.id) {

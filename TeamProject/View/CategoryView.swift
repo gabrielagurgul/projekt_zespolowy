@@ -14,7 +14,9 @@ struct CategoryView: View {
 	var body: some View {
 		VStack {
 			Text(name)
-				.font(.largeTitle)
+				.font(.title2)
+				.bold()
+				.fixedSize(horizontal: false, vertical: true)
 			image
 				.resizable()
 				.scaledToFit()

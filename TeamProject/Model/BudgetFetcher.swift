@@ -35,7 +35,13 @@ class BudgetFetcherImpl: BudgetFetcher {
 	}
 	
 	func getArrayOfBudgetsOf(type: ID) async throws -> [Budget] {
-		return Budget.listOfBudgetMock
+		let urlRequest = URLRequest(url: API.GET.budgetDescription)
+		let (data,_) = try await session.data(for: urlRequest)
+		guard let arrayOfBudgets = try? JSONDecoder().decode([Budget].self, from: data) else {
+			throw ApiError.InvalidDataDecoding
+		}
+		print(arrayOfBudgets)
+		return arrayOfBudgets
 	}
 	
 	func getBudgetBy(_ id: ID) async throws -> Budget {

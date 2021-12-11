@@ -8,13 +8,13 @@
 import SwiftUI
 
 struct CategoryDetailView: View {
+	@EnvironmentObject var viewModel: BudgetViewModel
 	let budgetType: BudgetType
     var body: some View {
 		VStack {
 			Text("id: \(budgetType.id) | Name: \(budgetType.type)")
 		}
 		.font(.largeTitle)
-		.padding()
     }
 }
 
