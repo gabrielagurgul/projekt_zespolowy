@@ -18,7 +18,7 @@ struct ContentView: View {
 	var body: some View {
 		NavigationView {
 			ScrollView {
-				Section("Finanse") {
+				Section {
 					ForEach(viewModel.budgetCategories) { budgetType in
 						if budgetType.id == 10 || budgetType.id == 11 {
 							CashView(budgetType: budgetType)
@@ -68,8 +68,7 @@ struct ContentView_Previews: PreviewProvider {
 		NavigationView {
 			ContentView()
 				.environmentObject(BudgetViewModel(fetcher: BudgetFetcherImpl()))
-			ContentView().preferredColorScheme(.dark)
-				.environmentObject(BudgetViewModel(fetcher: BudgetFetcherImpl()))
 		}
+		
 	}
 }

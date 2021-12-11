@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct CashView: View {
+	@Environment(\.colorScheme) var colorScheme
 	private let image: Image
 	private let name: String
 	private let ammount: String
@@ -29,11 +30,25 @@ struct CashView: View {
 		.frame(maxWidth: .infinity)
 		.frame(height: 160)
 		.background(alignment: .bottomTrailing) {
-			image.resizable().scaledToFit()
+			imageColor
 		}
 		.background(.regularMaterial)
 		.mask(RoundedRectangle(cornerRadius: 8))
 		.shadow(radius: 16)
+	}
+	
+	@ViewBuilder
+	private var imageColor: some View {
+		if colorScheme == .dark {
+			image
+				.resizable()
+				.scaledToFit()
+				.colorInvert()
+		} else {
+			image
+				.resizable()
+				.scaledToFit()
+		}
 	}
 }
 
