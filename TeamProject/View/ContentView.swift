@@ -26,6 +26,7 @@ struct ContentView: View {
 						}
 					}
 				}
+				.padding([.bottom],48)
 				LazyVGrid(columns: columns, spacing: 48){
 					ForEach(viewModel.budgetCategories) { budgetType in
 						if viewModel.hiddenTheSalaryAndBudget(budgetType.id) {
@@ -43,8 +44,6 @@ struct ContentView: View {
 			.onAppear(perform: {viewModel.getCategories()})
 			.overlay(loadingOverlay)
 		}
-		
-		
 	}
 	
 	@ViewBuilder

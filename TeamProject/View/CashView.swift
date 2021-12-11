@@ -44,11 +44,16 @@ struct CashView: View {
 				.resizable()
 				.scaledToFit()
 				.colorInvert()
+				.frame(height: 100)
+				.padding([.trailing, .bottom])
 		} else {
 			image
 				.resizable()
 				.scaledToFit()
+				.frame(height: 100)
+				.padding([.trailing, .bottom])
 		}
+
 	}
 }
 
