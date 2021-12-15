@@ -29,9 +29,7 @@ struct CashView: View {
 		.padding()
 		.frame(maxWidth: .infinity)
 		.frame(height: 160)
-		.background(alignment: .bottomTrailing) {
-			imageColor
-		}
+		.background(alignment: .bottomTrailing) {imageColor}
 		.background(.regularMaterial)
 		.mask(RoundedRectangle(cornerRadius: 8))
 		.shadow(radius: 16)

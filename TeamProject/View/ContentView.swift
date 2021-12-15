@@ -12,18 +12,15 @@ struct ContentView: View {
 	@EnvironmentObject var viewModel: BudgetViewModel
 	
 	let columns = [
-		GridItem(.flexible()),
-		GridItem(.flexible())
+		GridItem(.adaptive(minimum: 160))
 	]
 	var body: some View {
 		NavigationView {
 			ScrollView {
-				Section {
-					ForEach(viewModel.budgetCategories) { budgetType in
-						if budgetType.id == 10 || budgetType.id == 11 {
-							CashView(budgetType: budgetType)
-								.padding(.horizontal)
-						}
+				ForEach(viewModel.budgetCategories) { budgetType in
+					if budgetType.id == 10 || budgetType.id == 11 {
+						CashView(budgetType: budgetType)
+							.padding(.horizontal)
 					}
 				}
 				.padding([.bottom],48)
@@ -43,6 +40,7 @@ struct ContentView: View {
 			.navigationTitle("Analizator budżetu")
 			.onAppear(perform: {viewModel.getCategories()})
 			.overlay(loadingOverlay)
+			.background(Image("p2"))
 		}
 	}
 	

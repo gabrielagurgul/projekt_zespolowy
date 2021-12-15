@@ -13,19 +13,21 @@ struct SalaryView: View {
 	var body: some View {
 		VStack {
 			Spacer()
-			Section("Budżet") {
-				TextField("Budżet", text: $budget)
-					.textFieldStyle(RoundedBorderTextFieldStyle())
-			}
-			Section("Miesięczny dochód") {
-				TextField("Miesięczny dochód", text: $salary)
-					.textFieldStyle(RoundedBorderTextFieldStyle())
-			}
-			Button("Dodaj budżet") {
-				
-			}.buttonStyle(.automatic)
+			TextFieldSection(name: "Budget", description: "Budget", container: $budget)
+			TextFieldSection(name: "Monthly Salary", description: "Monthly Salary", container: $salary)
 			Spacer()
-			Button("Pomiń") {
+			Button {
+				
+			} label: {
+				Text("Forward")
+					.font(.title)
+					.frame(maxWidth: .infinity)
+			}
+			.buttonStyle(BorderedProminentButtonStyle())
+			.buttonBorderShape(ButtonBorderShape.capsule)
+			.tint(Color.green)
+			Spacer()
+			Button("Skip") {
 				
 			}
 		}
@@ -37,5 +39,31 @@ struct SalaryView: View {
 struct SalaryView_Previews: PreviewProvider {
 	static var previews: some View {
 		SalaryView()
+	}
+}
+
+struct TextFieldSection: View {
+	let name: String
+	let description: String
+	@Binding var container: String
+	var body: some View {
+		Section {
+			TextField(name, text: $container)
+				.textFieldStyle(RoundedBorderTextFieldStyle())
+		} header: {
+			TextFieldTitle(description: description)
+		}
+	}
+}
+
+struct TextFieldTitle: View {
+	let description: String
+	var body: some View {
+		HStack {
+			Text(description)
+				.font(.title)
+				.bold()
+			Spacer()
+		}
 	}
 }
