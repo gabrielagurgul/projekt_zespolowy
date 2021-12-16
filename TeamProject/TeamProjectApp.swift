@@ -11,8 +11,8 @@ import SwiftUI
 struct TeamProjectApp: App {
     var body: some Scene {
         WindowGroup {
-            SalaryView()
-				.environmentObject(BudgetViewModel(fetcher: BudgetFetcherImpl()))
+            ContentView()
+				.environmentObject(BudgetViewModel())
         }
     }
 }

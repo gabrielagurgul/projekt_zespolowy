@@ -11,18 +11,18 @@ import Foundation
 class BudgetViewModel: ObservableObject {
 	@Published var budgetCategories: [BudgetType] = []
 	@Published var isLoading = false
-	private let fetcher: BudgetFetcher
+//	private let fetcher: BudgetFetcher
 	private var task: Task<(),Never>?
 	
-	init(fetcher: BudgetFetcher) {
-		self.fetcher = fetcher
-	}
+//	init(fetcher: BudgetFetcher) {
+//		self.fetcher = fetcher
+//	}
 	
 	func getCategories() {
 		task = Task {
 			isLoading = true
 			do {
-				budgetCategories = try await fetcher.getArrayOfBudgetCategories()
+				budgetCategories = try await getArrayOfBudgetCategories()
 				
 			} catch let error {
 				print(error.localizedDescription)
