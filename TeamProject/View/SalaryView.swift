@@ -11,28 +11,35 @@ struct SalaryView: View {
 	@State var budget: String = "13.01"
 	@State var salary: String = "15.01"
 	var body: some View {
-		VStack {
-			Spacer()
-			TextFieldSection(name: "Budget", description: "Budget", container: $budget)
-			TextFieldSection(name: "Monthly Salary", description: "Monthly Salary", container: $salary)
-			Spacer()
-			Button {
+		NavigationView {
+			VStack {
+				Spacer()
+				TextFieldSection(name: "Budget", description: "Budget", container: $budget)
+				TextFieldSection(name: "Monthly Salary", description: "Monthly Salary", container: $salary)
+				Spacer()
+				Button {
+					
+				} label: {
+					Text("Forward")
+						.font(.title)
+						.frame(maxWidth: .infinity)
+				}
+				.buttonStyle(BorderedProminentButtonStyle())
+				.buttonBorderShape(ButtonBorderShape.capsule)
+				.tint(Color.green)
+				Spacer()
+				NavigationLink{
+					ContentView()
+						.environmentObject(BudgetViewModel())
+						.navigationBarHidden(true)
+				} label: {
+					Text("Skip")
+				}
 				
-			} label: {
-				Text("Forward")
-					.font(.title)
-					.frame(maxWidth: .infinity)
 			}
-			.buttonStyle(BorderedProminentButtonStyle())
-			.buttonBorderShape(ButtonBorderShape.capsule)
-			.tint(Color.green)
-			Spacer()
-			Button("Skip") {
-				
-			}
+			.padding()
+			.background {Image("p2")}
 		}
-		.padding()
-		.background {Image("p2")}
 	}
 }
 

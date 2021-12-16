@@ -42,6 +42,7 @@ struct ContentView: View {
 			.overlay(loadingOverlay)
 			.background(Image("p2"))
 		}
+		.navigationViewStyle(.stack)
 	}
 	
 	@ViewBuilder
@@ -60,12 +61,12 @@ struct ContentView: View {
 	
 }
 
-struct ContentView_Previews: PreviewProvider {
-	static var previews: some View {
-		NavigationView {
-			ContentView()
-				.environmentObject(BudgetViewModel(fetcher: BudgetFetcherImpl()))
-		}
-		
-	}
-}
+//struct ContentView_Previews: PreviewProvider {
+//	static var previews: some View {
+//		NavigationView {
+//			ContentView()
+//				.environmentObject(BudgetViewModel(fetcher: BudgetFetcherImpl()))
+//		}
+//		
+//	}
+//}
