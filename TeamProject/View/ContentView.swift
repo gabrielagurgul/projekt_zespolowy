@@ -39,34 +39,9 @@ struct ContentView: View {
 			}
 			.navigationTitle("Analizator budżetu")
 			.onAppear(perform: {viewModel.getCategories()})
-			.overlay(loadingOverlay)
+			.overlay(LoadingView(isLoading: $viewModel.isLoading))
 			.background(Image("p2"))
 		}
 		.navigationViewStyle(.stack)
 	}
-	
-	@ViewBuilder
-	private var loadingOverlay: some View {
-		if viewModel.isLoading {
-			ProgressView()
-				.progressViewStyle(CircularProgressViewStyle(tint: .blue))
-				.padding(50)
-				.background(.regularMaterial)
-				.mask(RoundedRectangle(cornerRadius: 8))
-				.overlay(alignment: .bottom) {
-					Text("Please wait")
-				}
-		}
-	}
-	
 }
-
-//struct ContentView_Previews: PreviewProvider {
-//	static var previews: some View {
-//		NavigationView {
-//			ContentView()
-//				.environmentObject(BudgetViewModel(fetcher: BudgetFetcherImpl()))
-//		}
-//		
-//	}
-//}

@@ -23,9 +23,16 @@ struct CashView: View {
 					.bold()
 				Spacer()
 			}
-			Text(ammount)
-				.font(.title)
-				.padding([.leading, .top])
+			if !isLoading {
+				Text(ammount)
+					.font(.title)
+					.padding([.leading, .top])
+			} else {
+				ProgressView()
+					.progressViewStyle(.circular)
+					.padding([.leading, .top])
+				
+			}
 			Spacer()
 		}
 		.padding()
@@ -36,8 +43,8 @@ struct CashView: View {
 		.mask(RoundedRectangle(cornerRadius: 8))
 		.shadow(radius: 16)
 		.task {
+			isLoading = true
 			do {
-				isLoading = true
 				let response = try await getBudgetBy(id)
 				let sum = response.map {$0.amount}.reduce(0,+)
 				ammount = "\(sum)"
@@ -45,6 +52,7 @@ struct CashView: View {
 				print(error.localizedDescription)
 				ammount = "Nie udało się przechwycić danych"
 			}
+			isLoading = false
 		}
 	}
 	
@@ -64,21 +72,7 @@ struct CashView: View {
 				.frame(height: 100)
 				.padding([.trailing, .bottom])
 		}
-
-	}
-	
-	@ViewBuilder
-	private var loadingOverlay: some View {
-		if isLoading {
-			ProgressView()
-				.progressViewStyle(CircularProgressViewStyle(tint: .blue))
-				.padding(50)
-				.background(.regularMaterial)
-				.mask(RoundedRectangle(cornerRadius: 8))
-				.overlay(alignment: .bottom) {
-					Text("Please wait")
-				}
-		}
+		
 	}
 }
 

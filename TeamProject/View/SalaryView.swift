@@ -11,6 +11,7 @@ struct SalaryView: View {
 	@State var budget: Int = 100
 	@State var salary: Int = 100
 	@State var didFinish = false
+	@State var isLoading = false
 	@State var showAlert = false
 	@State var error: Error?
 	var body: some View {
@@ -22,15 +23,18 @@ struct SalaryView: View {
 				Spacer()
 				Button {
 					Task {
+						isLoading = true
 						do {
-							let _  = try await addBudget(Budget(id: 0, description: "Budżet", amount: budget, addedDate: Date()), category: .Budget)
-							let _ = try await addBudget(Budget(id: 0, description: "Miesięczny przychód", amount: salary, addedDate: Date()), category: .Month_income)
-							didFinish = true
+							_  = try await addBudget(Budget(id: 0, description: "Budżet", amount: budget, addedDate: Date()), category: .Budget)
+							_ = try await addBudget(Budget(id: 0, description: "Miesięczny przychód", amount: salary, addedDate: Date()), category: .Month_income)
 						}
 						catch let apiError {
 							error = apiError
 							showAlert = true
+							isLoading = false
 						}
+						isLoading = false
+						didFinish = true
 					}
 				} label: {
 					Text("Forward")
@@ -60,6 +64,7 @@ struct SalaryView: View {
 					Text("Skip")
 				}
 			}
+			.overlay(LoadingView(isLoading: $isLoading))
 			.padding()
 			.background {Image("p2")}
 		}
