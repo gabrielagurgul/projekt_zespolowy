@@ -36,6 +36,7 @@ func addBudget(_ budget: Budget, category: REST.Category) async throws {
 		throw ApiError.invalidDataEncoding
 	}
 	urlRequest.httpBody = data
+	_ = try await session.data(for: urlRequest)
 }
 
 func addUserSalary(ammount: PLN) async throws -> PLN {
