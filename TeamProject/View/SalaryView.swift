@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct SalaryView: View {
-	@State var budget: String = "13.01"
-	@State var salary: String = "15.01"
+	@State var budget: Int = 100
+	@State var salary: Int = 100
 	@State var didFinish = false
 	@State var showAlert = false
 	@State var error: Error?
@@ -23,8 +23,8 @@ struct SalaryView: View {
 				Button {
 					Task {
 						do {
-							let _  = try await addBudget(Budget(id: 0, description: "Budżet", amount: Int(budget) ?? 0, addedDate: Date()), category: .Budget)
-							let _ = try await addBudget(Budget(id: 0, description: "Miesięczny przychód", amount: Int(salary) ?? 0, addedDate: Date()), category: .Month_income)
+							let _  = try await addBudget(Budget(id: 0, description: "Budżet", amount: budget, addedDate: Date()), category: .Budget)
+							let _ = try await addBudget(Budget(id: 0, description: "Miesięczny przychód", amount: salary, addedDate: Date()), category: .Month_income)
 							didFinish = true
 						}
 						catch let apiError {
@@ -75,11 +75,12 @@ struct SalaryView_Previews: PreviewProvider {
 struct TextFieldSection: View {
 	let name: String
 	let description: String
-	@Binding var container: String
+	@Binding var container: Int
 	var body: some View {
 		Section {
-			TextField(name, text: $container)
+			TextField(name, text: Binding(get: {String(container)}, set: {container = Int($0) ?? 0}))
 				.textFieldStyle(RoundedBorderTextFieldStyle())
+				.keyboardType(.numberPad)
 				.border(.green.opacity(0.3))
 				.shadow(radius: 5)
 		} header: {
