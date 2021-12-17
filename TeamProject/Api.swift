@@ -16,7 +16,8 @@ struct API {
     }
     
     struct POST {
-        static let addBudget = "https://webapi-nn.herokuapp.com/api/budget/add/"
+		static let addSalary = "https://webapi-nn.herokuapp.com/api/budget/add/10"
+        static let addBudget = "https://webapi-nn.herokuapp.com/api/budget/add/11"
         static let availableCash = "https://webapi-nn.herokuapp.com/api/availableCash"
         static let unavailableTypeCash = "https://webapi-nn.herokuapp.com/api/unavailableTypeCash"
     }

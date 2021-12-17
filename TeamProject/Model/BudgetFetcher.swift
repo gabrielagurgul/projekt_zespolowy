@@ -27,18 +27,34 @@ func getArrayOfBudgetsOf(type: ID) async throws -> [Budget] {
 	guard let arrayOfBudgets = try? JSONDecoder().decode([Budget].self, from: data) else {
 		throw ApiError.invalidDataDecoding
 	}
-	print(arrayOfBudgets)
 	return arrayOfBudgets
 }
 
 func getBudgetBy(_ id: ID) async throws -> Budget {
+	let urlRequest = try prepareUrlRequest(API.GET.listOfBudgets, method: .GET)
+	let (data,_) = try await session.data(for: urlRequest)
+	
 	return Budget.budgetMock
 }
 
-func addUserBudget(ammount: PLN) async throws -> PLN {
-	let urlRequest = try prepareUrlRequest(API.POST.addBudget, method: .POST)
+func addUserBudget(ammount: PLN) async throws -> Budget {
+	var urlRequest = try prepareUrlRequest(API.POST.addBudget, method: .POST)
+	guard let data = try? JSONEncoder().encode(Budget.budgetMock.data) else {
+		throw ApiError.invalidDataEncoding
+	}
+	urlRequest.httpBody = data
+	let (serverData,_) = try await session.data(for: urlRequest)
+	guard let budgetAPIData = try? JSONDecoder().decode(Budget.BudgetAPI.self, from: serverData) else {
+		throw ApiError.invalidDataDecoding
+	}
+	print(budgetAPIData)
+	return Budget.budgetMock
+}
+
+func addUserSalary(ammount: PLN) async throws -> PLN {
+	let urlRequest = try prepareUrlRequest(API.POST.addSalary, method: .POST)
 	let (data,_) = try await session.data(for: urlRequest)
-	guard let ammount = try? JSONDecoder().decode(Double.self, from: data) else {
+	guard let ammount = try? JSONDecoder().decode(PLN.self, from: data) else {
 		throw ApiError.invalidDataDecoding
 	}
 	return ammount
@@ -62,12 +78,15 @@ enum REST: String {
 enum ApiError: Error, LocalizedError {
 	case invalidDataDecoding
 	case invalidURL
+	case invalidDataEncoding
 	var errorDescription: String? {
 		switch self {
 		case .invalidDataDecoding:
 			return "Nie udało się przekonwertować danych otrzymanych od serwera"
 		case .invalidURL:
 			return "Nie udało się utworzyć adresu url"
+		case .invalidDataEncoding:
+			return "Nie udało się utworzyć danych do przesłania na serwer"
 		}
 	}
 }
@@ -77,6 +96,7 @@ private func prepareUrlRequest(_ apiURL: String, method: REST) throws -> URLRequ
 		throw ApiError.invalidURL
 	}
 	var urlRequest = URLRequest(url: url)
+	urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
 	urlRequest.httpMethod = method.rawValue
 	return urlRequest
 }
