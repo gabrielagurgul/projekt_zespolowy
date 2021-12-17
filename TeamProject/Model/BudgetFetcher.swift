@@ -21,37 +21,21 @@ func getArrayOfBudgetCategories() async throws -> [BudgetType] {
 	return arrayOfBudgetsCategories
 }
 
-func getArrayOfBudgetsOf(type: ID) async throws -> [Budget] {
-	let urlRequest = try prepareUrlRequest(API.GET.budgetDescription, method: .GET)
-	let (data,_) = try await session.data(for: urlRequest)
-	guard let arrayOfBudgets = try? JSONDecoder().decode([Budget].self, from: data) else {
-		throw ApiError.invalidDataDecoding
-	}
-	return arrayOfBudgets
-}
-
 func getBudgetBy(_ id: ID) async throws -> [Budget.BudgetAPI] {
 	let urlRequest = try prepareUrlRequest(API.GET.budgetDescription + "\(id)", method: .GET)
-	let (data,response) = try await session.data(for: urlRequest)
-	let json = String(data: data, encoding: .utf8)
+	let (data,_) = try await session.data(for: urlRequest)
 	guard let servData = try? JSONDecoder().decode([Budget.BudgetAPI].self, from: data) else {
 		throw ApiError.invalidDataDecoding
 	}
 	return servData
 }
 
-func addUserBudget(/*_ monthBudget: Budget.BudgetAPI */) async throws -> Budget {
-	var urlRequest = try prepareUrlRequest(API.POST.addBudget, method: .POST)
-	guard let data = try? JSONEncoder().encode(Budget.budgetMock.data) else {
+func addBudget(_ budget: Budget, category: REST.Category) async throws {
+	var urlRequest = try prepareUrlRequest(API.POST.addBudget + "\(category.rawValue)", method: .POST)
+	guard let data = try? JSONEncoder().encode(budget.data) else {
 		throw ApiError.invalidDataEncoding
 	}
 	urlRequest.httpBody = data
-	let (serverData,_) = try await session.data(for: urlRequest)
-	guard let budgetAPIData = try? JSONDecoder().decode(Budget.BudgetAPI.self, from: serverData) else {
-		throw ApiError.invalidDataDecoding
-	}
-	print(budgetAPIData)
-	return Budget.budgetMock
 }
 
 func addUserSalary(ammount: PLN) async throws -> PLN {
@@ -76,6 +60,20 @@ enum REST: String {
 	case PUT = "PUT"
 	case DELETE = "DELETE"
 	case POST = "POST"
+	
+	enum Category: Int {
+		case Food = 1
+		case Home = 2
+		case Health = 3
+		case Family = 4
+		case Car = 5
+		case Entertainment = 6
+		case Stimulant = 7
+		case Investment_S = 8
+		case Investment_R = 9
+		case Month_income = 10
+		case Budget = 11
+	}
 }
 
 enum ApiError: Error, LocalizedError {
