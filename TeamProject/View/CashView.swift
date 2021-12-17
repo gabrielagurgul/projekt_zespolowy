@@ -9,9 +9,11 @@ import SwiftUI
 
 struct CashView: View {
 	@Environment(\.colorScheme) var colorScheme
+	private let id: Int
 	private let image: Image
 	private let name: String
-	private let ammount: String
+	@State var ammount: String = ""
+	@State var isLoading = false
 	
 	var body: some View {
 		VStack(alignment: .leading) {
@@ -33,6 +35,17 @@ struct CashView: View {
 		.background(.regularMaterial)
 		.mask(RoundedRectangle(cornerRadius: 8))
 		.shadow(radius: 16)
+		.task {
+			do {
+				isLoading = true
+				let response = try await getBudgetBy(id)
+				let sum = response.map {$0.amount}.reduce(0,+)
+				ammount = "\(sum)"
+			} catch let error  {
+				print(error.localizedDescription)
+				ammount = "Nie udało się przechwycić danych"
+			}
+		}
 	}
 	
 	@ViewBuilder
@@ -53,13 +66,27 @@ struct CashView: View {
 		}
 
 	}
+	
+	@ViewBuilder
+	private var loadingOverlay: some View {
+		if isLoading {
+			ProgressView()
+				.progressViewStyle(CircularProgressViewStyle(tint: .blue))
+				.padding(50)
+				.background(.regularMaterial)
+				.mask(RoundedRectangle(cornerRadius: 8))
+				.overlay(alignment: .bottom) {
+					Text("Please wait")
+				}
+		}
+	}
 }
 
 extension CashView {
 	init(budgetType: BudgetType) {
+		id = budgetType.id
 		image = Image(budgetType.type.lowercased())
 		name = budgetType.type
-		ammount = "1345.00"
 	}
 }
 

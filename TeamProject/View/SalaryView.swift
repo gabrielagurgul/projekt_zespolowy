@@ -23,9 +23,8 @@ struct SalaryView: View {
 				Button {
 					Task {
 						do {
-							let server  = try await addUserBudget(ammount: Double(budget) ?? 0.0)
+							let server  = try await addUserBudget(/*ammount: Double(budget) ?? 0.0*/)
 //							let serverSalary = try await addUserSalary(ammount: Double(salary) ?? 0)
-							
 							didFinish = true
 						}
 						catch let apiError {

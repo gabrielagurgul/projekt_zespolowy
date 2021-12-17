@@ -12,7 +12,7 @@ struct API {
         static let listOfBudgets = "https://webapi-nn.herokuapp.com/api/budget"
         static let listOfBudgetsType = "https://webapi-nn.herokuapp.com/api/budget/"
         static let budgetDescription = "https://webapi-nn.herokuapp.com/api/budget/type/"
-        static let budgetTypeDescription = "https://webapi-nn.herokuapp.com/api/budgetType/"
+        static let availableCategories = "https://webapi-nn.herokuapp.com/api/budgetType/"
     }
     
     struct POST {

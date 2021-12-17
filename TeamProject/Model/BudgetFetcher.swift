@@ -13,7 +13,7 @@ fileprivate let session: URLSession = URLSession.shared
 
 
 func getArrayOfBudgetCategories() async throws -> [BudgetType] {
-	let urlRequest = try prepareUrlRequest(API.GET.budgetTypeDescription, method: .GET)
+	let urlRequest = try prepareUrlRequest(API.GET.availableCategories, method: .GET)
 	let (data,_) = try await session.data(for: urlRequest)
 	guard let arrayOfBudgetsCategories = try? JSONDecoder().decode([BudgetType].self, from: data) else {
 		throw ApiError.invalidDataDecoding
@@ -30,14 +30,17 @@ func getArrayOfBudgetsOf(type: ID) async throws -> [Budget] {
 	return arrayOfBudgets
 }
 
-func getBudgetBy(_ id: ID) async throws -> Budget {
-	let urlRequest = try prepareUrlRequest(API.GET.listOfBudgets, method: .GET)
-	let (data,_) = try await session.data(for: urlRequest)
-	
-	return Budget.budgetMock
+func getBudgetBy(_ id: ID) async throws -> [Budget.BudgetAPI] {
+	let urlRequest = try prepareUrlRequest(API.GET.budgetDescription + "\(id)", method: .GET)
+	let (data,response) = try await session.data(for: urlRequest)
+	let json = String(data: data, encoding: .utf8)
+	guard let servData = try? JSONDecoder().decode([Budget.BudgetAPI].self, from: data) else {
+		throw ApiError.invalidDataDecoding
+	}
+	return servData
 }
 
-func addUserBudget(ammount: PLN) async throws -> Budget {
+func addUserBudget(/*_ monthBudget: Budget.BudgetAPI */) async throws -> Budget {
 	var urlRequest = try prepareUrlRequest(API.POST.addBudget, method: .POST)
 	guard let data = try? JSONEncoder().encode(Budget.budgetMock.data) else {
 		throw ApiError.invalidDataEncoding
