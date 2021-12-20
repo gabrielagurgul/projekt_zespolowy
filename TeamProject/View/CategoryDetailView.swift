@@ -12,10 +12,14 @@ struct CategoryDetailView: View {
 	@ObservedObject var viewModel: CategoryDetailViewModel
 	var body: some View {
 		VStack {
-			
-			//				PieChart(chart9
-			Spacer()
-			//				Text("id: \(budgetType.id) | Name: \(budgetType.type)")
+			PieChart(chartData: PieChartData(dataSets: PieDataSet(dataPoints: [PieChartDataPoint(value: 1),PieChartDataPoint(value: 2)], legendTitle: "xd")))
+			List(1..<10) { number in
+				HStack {
+					Text("\(number) Jakis produkt")
+					Spacer()
+					Text("\(Double.random(in: 0...10))")
+				}
+			}
 			HStack {
 				Button {
 					viewModel.addView.toggle()
@@ -32,29 +36,32 @@ struct CategoryDetailView: View {
 			.padding([.leading,.trailing])
 		}
 		.sheet(isPresented: $viewModel.addView) {
-			NavigationView {
-				Text("Add")
-					.toolbar {
-						ToolbarItem(placement: .navigationBarLeading) {
-							Button("Dissmis") {
-								viewModel.addView.toggle()
-							}
+			print("znikam")
+		}
+	content: {
+		NavigationView {
+			Text("Add")
+				.toolbar {
+					ToolbarItem(placement: .navigationBarLeading) {
+						Button("Dissmis") {
+							viewModel.addView.toggle()
 						}
 					}
-			}
+				}
 		}
-		.sheet(isPresented: $viewModel.predictView) {
-			NavigationView {
-				Text("Predict")
-					.toolbar {
-						ToolbarItem(placement: .navigationBarLeading) {
-							Button("Dissmis") {
-								viewModel.predictView.toggle()
-							}
+	}
+	.sheet(isPresented: $viewModel.predictView) {
+		NavigationView {
+			Text("Predict")
+				.toolbar {
+					ToolbarItem(placement: .navigationBarLeading) {
+						Button("Dissmis") {
+							viewModel.predictView.toggle()
 						}
 					}
-			}
+				}
 		}
+	}
 	}
 }
 
