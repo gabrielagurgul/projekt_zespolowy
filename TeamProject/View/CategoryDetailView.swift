@@ -6,20 +6,34 @@
 //
 
 import SwiftUI
+import SwiftUICharts
 
 struct CategoryDetailView: View {
-	@EnvironmentObject var viewModel: BudgetViewModel
-	let budgetType: BudgetType
-    var body: some View {
-		VStack {
-			Text("id: \(budgetType.id) | Name: \(budgetType.type)")
+	@ObservedObject var viewModel: CategoryDetailViewModel
+	var body: some View {
+		GeometryReader { proxy in
+			VStack {
+//				PieChart(chart9
+				Spacer()
+//				Text("id: \(budgetType.id) | Name: \(budgetType.type)")
+				HStack {
+					Button {} label: {
+						Text("Add")
+					}
+					Spacer()
+					Button {} label: {
+						Text("Predicate")
+					}
+				}
+				.padding([.leading,.trailing])
+			}
 		}
-		.font(.largeTitle)
-    }
+//		.background{Image("p2")}
+	}
 }
 
 struct CategoryDetailView_Previews: PreviewProvider {
-    static var previews: some View {
-		CategoryDetailView(budgetType: BudgetType.budgetTypeMock)
-    }
+	static var previews: some View {
+		CategoryDetailView(viewModel: CategoryDetailViewModel(budgetType: BudgetType.budgetTypeMock))
+	}
 }

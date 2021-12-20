@@ -28,7 +28,7 @@ struct ContentView: View {
 					ForEach(viewModel.budgetCategories) { budgetType in
 						if viewModel.hiddenTheSalaryAndBudget(budgetType.id) {
 							NavigationLink {
-								CategoryDetailView(budgetType: budgetType)
+								CategoryDetailView(viewModel: CategoryDetailViewModel(budgetType: budgetType))
 							} label: {
 								CategoryView(budgetType: budgetType)
 							}
