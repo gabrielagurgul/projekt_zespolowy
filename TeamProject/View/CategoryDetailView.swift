@@ -11,24 +11,50 @@ import SwiftUICharts
 struct CategoryDetailView: View {
 	@ObservedObject var viewModel: CategoryDetailViewModel
 	var body: some View {
-		GeometryReader { proxy in
-			VStack {
-//				PieChart(chart9
-				Spacer()
-//				Text("id: \(budgetType.id) | Name: \(budgetType.type)")
-				HStack {
-					Button {} label: {
-						Text("Add")
-					}
-					Spacer()
-					Button {} label: {
-						Text("Predicate")
-					}
+		VStack {
+			
+			//				PieChart(chart9
+			Spacer()
+			//				Text("id: \(budgetType.id) | Name: \(budgetType.type)")
+			HStack {
+				Button {
+					viewModel.addView.toggle()
+				} label: {
+					Text("Add")
 				}
-				.padding([.leading,.trailing])
+				Spacer()
+				Button {
+					viewModel.predictView.toggle()
+				} label: {
+					Text("Predicate")
+				}
+			}
+			.padding([.leading,.trailing])
+		}
+		.sheet(isPresented: $viewModel.addView) {
+			NavigationView {
+				Text("Add")
+					.toolbar {
+						ToolbarItem(placement: .navigationBarLeading) {
+							Button("Dissmis") {
+								viewModel.addView.toggle()
+							}
+						}
+					}
 			}
 		}
-//		.background{Image("p2")}
+		.sheet(isPresented: $viewModel.predictView) {
+			NavigationView {
+				Text("Predict")
+					.toolbar {
+						ToolbarItem(placement: .navigationBarLeading) {
+							Button("Dissmis") {
+								viewModel.predictView.toggle()
+							}
+						}
+					}
+			}
+		}
 	}
 }
 

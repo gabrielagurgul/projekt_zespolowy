@@ -11,6 +11,8 @@ import SwiftUICharts
 @MainActor
 class CategoryDetailViewModel: ObservableObject {
 	private let budgetType: BudgetType
+	@Published var addView: Bool = false
+	@Published var predictView: Bool = false
 	
 //	var chartb
 	
