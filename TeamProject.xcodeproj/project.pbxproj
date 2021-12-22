@@ -11,6 +11,7 @@
 		5006B014276396CA007F60CB /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 5006B013276396CA007F60CB /* .gitignore */; };
 		5006B0172763BE0E007F60CB /* CategoryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5006B0162763BE0E007F60CB /* CategoryDetailView.swift */; };
 		5055A45927636EE900D874BE /* BudgetFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5055A45827636EE900D874BE /* BudgetFetcher.swift */; };
+		506163ED2773B80E00F1439D /* Color+random.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506163EC2773B80E00F1439D /* Color+random.swift */; };
 		5077519E2770BBA300E737E6 /* CategoryDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5077519D2770BBA300E737E6 /* CategoryDetailViewModel.swift */; };
 		50A79B572764E2B400345FF9 /* SalaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50A79B562764E2B400345FF9 /* SalaryView.swift */; };
 		50C65D97276C969400448F44 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50C65D96276C969400448F44 /* LoadingView.swift */; };
@@ -31,6 +32,7 @@
 		5006B013276396CA007F60CB /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		5006B0162763BE0E007F60CB /* CategoryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryDetailView.swift; sourceTree = "<group>"; };
 		5055A45827636EE900D874BE /* BudgetFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetFetcher.swift; sourceTree = "<group>"; };
+		506163EC2773B80E00F1439D /* Color+random.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+random.swift"; sourceTree = "<group>"; };
 		5077519D2770BBA300E737E6 /* CategoryDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryDetailViewModel.swift; sourceTree = "<group>"; };
 		50A79B562764E2B400345FF9 /* SalaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalaryView.swift; sourceTree = "<group>"; };
 		50C65D96276C969400448F44 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
@@ -117,6 +119,7 @@
 				50FB12E4275CFA8E0033F057 /* Assets.xcassets */,
 				50FB12E6275CFA8E0033F057 /* Preview Content */,
 				50DF9A8F275FC12200DA8637 /* Api.swift */,
+				506163EC2773B80E00F1439D /* Color+random.swift */,
 			);
 			path = TeamProject;
 			sourceTree = "<group>";
@@ -212,6 +215,7 @@
 				50A79B572764E2B400345FF9 /* SalaryView.swift in Sources */,
 				50FB12E3275CFA8C0033F057 /* ContentView.swift in Sources */,
 				50FB12E1275CFA8C0033F057 /* TeamProjectApp.swift in Sources */,
+				506163ED2773B80E00F1439D /* Color+random.swift in Sources */,
 				50C65D97276C969400448F44 /* LoadingView.swift in Sources */,
 				50DF9A95275FC46C00DA8637 /* Budget.swift in Sources */,
 				50E15E8A2764B9E200D7735A /* CashView.swift in Sources */,
