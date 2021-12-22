@@ -24,6 +24,19 @@ extension Budget {
 	var data: BudgetAPI {
 		BudgetAPI(description: description, amount: amount, addedData: addedDate.ISO8601Format())
 	}
+	
+	static func createBudget(from budget: BudgetAPI) -> Budget {
+		var date: Date
+		do {
+			date = try Date(budget.addedData, strategy: .iso8601)
+		} catch let error {
+			print(error.localizedDescription)
+			date = Date()
+		}
+		let ret =  Budget(id: Int.random(in: Int.min...Int.max - 1), description: budget.description, amount: budget.amount, addedDate: date)
+		return ret
+	}
+	
 }
 
 

@@ -12,10 +12,10 @@ struct CategoryDetailView: View {
 	@ObservedObject var viewModel: CategoryDetailViewModel
 	var body: some View {
 		VStack {
-			PieChart(chartData: PieChartData(dataSets: PieDataSet(dataPoints: [PieChartDataPoint(value: 1),PieChartDataPoint(value: 2)], legendTitle: "xd")))
-			List(1..<10) { number in
+			PieChart(chartData: PieChartData(dataSets: PieDataSet(dataPoints: [PieChartDataPoint(value: 1),PieChartDataPoint(value: 2)], legendTitle: "")))
+			List(viewModel.budgets) { budget in
 				HStack {
-					Text("\(number) Jakis produkt")
+					Text("\(budget.description) Jakis produkt")
 					Spacer()
 					Text("\(Double.random(in: 0...10))")
 				}
@@ -35,6 +35,8 @@ struct CategoryDetailView: View {
 			}
 			.padding([.leading,.trailing])
 		}
+		.onAppear {viewModel.getBudgets()}
+		.overlay(LoadingView(isLoading: $viewModel.isLoading))
 		.sheet(isPresented: $viewModel.addView) {
 			print("znikam")
 		}
