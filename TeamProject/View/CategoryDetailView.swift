@@ -83,6 +83,16 @@ struct AddView: View {
 				.textFieldStyle(RoundedBorderTextFieldStyle())
 			TextField("Ammount", text: Binding(get: {String(budget.amount)}, set: {budget.amount = Int($0) ?? 0}))
 				.textFieldStyle(RoundedBorderTextFieldStyle())
+			Button {
+				print("Następuje predykcja!")
+			} label: {
+				Text("Predicate")
+					.foregroundColor(.white)
+					.frame(maxWidth: .infinity)
+					.frame(height: 40)
+					.background(RoundedRectangle(cornerRadius: 8).foregroundColor(.blue))
+			}
+			.padding(.top, 40)
 		}
 		.padding([.leading, .trailing])
 		.background {Image("p2")}
