@@ -15,9 +15,8 @@ class CategoryDetailViewModel: ObservableObject {
 	@Published var predictView: Bool = false
 	@Published var budgets: [Budget] = []
 	@Published var isLoading: Bool = false
-	
-//	var chartb
-	
+	@Published var data = Budget.BudgetAPI()
+	@Published var chartData: PieChartData = PieChartData(dataSets: PieDataSet(dataPoints: [], legendTitle: ""))
 	
 	init (budgetType: BudgetType) {
 		self.budgetType = budgetType
@@ -28,7 +27,7 @@ class CategoryDetailViewModel: ObservableObject {
 			isLoading = true
 			do {
 				budgets = try await getBudgetBy(budgetType.id).map { Budget.createBudget(from: $0)}
-				print(budgets)
+				chartData = PieChartData(dataSets: PieDataSet(dataPoints: createChartFromBudget(), legendTitle: "wtf"))
 			} catch let error {
 				print(error.localizedDescription)
 			}
@@ -36,7 +35,21 @@ class CategoryDetailViewModel: ObservableObject {
 		}
 	}
 	
-	func addBudget() {
+	func add() {
+		Task {
+			isLoading = true
+			do {
+				_ = try await addBudget(Budget.createBudget(from: data), category: REST.getCategoryById(id: budgetType.id))
+			} catch let error {
+				print(error.localizedDescription)
+			}
+			isLoading = false
+		}
 		
 	}
+	
+	private func createChartFromBudget() -> [PieChartDataPoint] {
+		return budgets.compactMap { $0.createPieData()}
+	}
+	
 }

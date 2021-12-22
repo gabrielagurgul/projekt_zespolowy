@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import SwiftUICharts
+import SwiftUI
 
 struct Budget: Codable, Identifiable {
 	let id: Int
@@ -16,9 +18,9 @@ struct Budget: Codable, Identifiable {
 
 extension Budget {
 	struct BudgetAPI: Codable {
-		var description: String
-		var amount: Int
-		var addedData: String
+		var description: String = ""
+		var amount: Int = 1
+		var addedData: String = Date().ISO8601Format()
 	}
 	
 	var data: BudgetAPI {
@@ -39,6 +41,11 @@ extension Budget {
 	
 }
 
+extension Budget {
+	func createPieData() -> PieChartDataPoint {
+		return PieChartDataPoint(value: Double(self.amount), description: self.description, date: self.addedDate, colour: Color.random)
+	}
+}
 
 extension Budget {
 	static let budgetMock = Budget(id: 1, description: "Ciekawy wydatek", amount: 13, addedDate: Date())

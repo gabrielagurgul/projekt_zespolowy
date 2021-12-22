@@ -75,6 +75,23 @@ enum REST: String {
 		case Month_income = 10
 		case Budget = 11
 	}
+	
+	static func getCategoryById(id: ID) -> Category {
+		switch id {
+		case 1: return .Food
+		case 2: return .Home
+		case 3: return .Health
+		case 4: return .Family
+		case 5: return .Car
+		case 6: return .Entertainment
+		case 7: return .Stimulant
+		case 8: return .Investment_S
+		case 9: return .Investment_R
+		case 10: return .Month_income
+		case 11: return .Budget
+		default: return .Food
+		}
+	}
 }
 
 enum ApiError: Error, LocalizedError {

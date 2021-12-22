@@ -10,55 +10,54 @@ import SwiftUICharts
 
 struct CategoryDetailView: View {
 	@ObservedObject var viewModel: CategoryDetailViewModel
+	
 	var body: some View {
-		VStack {
-			PieChart(chartData: PieChartData(dataSets: PieDataSet(dataPoints: [PieChartDataPoint(value: 1),PieChartDataPoint(value: 2)], legendTitle: "")))
-			List(viewModel.budgets) { budget in
-				HStack {
-					Text("\(budget.description) Jakis produkt")
-					Spacer()
-					Text("\(Double.random(in: 0...10))")
+		ZStack {
+			VStack {
+				PieChart(chartData: viewModel.chartData)
+				List(viewModel.budgets, id: \.id) { budget in
+					HStack {
+						Text(budget.description)
+						Spacer()
+						Text("\(budget.amount)")
+					}
 				}
 			}
-			HStack {
-				Button {
-					viewModel.addView.toggle()
-				} label: {
-					Text("Add")
-				}
+			VStack {
 				Spacer()
-				Button {
-					viewModel.predictView.toggle()
-				} label: {
-					Text("Predicate")
+				HStack {
+					Spacer()
+					Button {
+						viewModel.addView.toggle()
+					} label: {
+						Image(systemName: "plus")
+							.foregroundColor(.white)
+							.frame(width: 50, height: 50)
+							.background(Circle().foregroundColor(.green))
+					}.buttonStyle(PlainButtonStyle())
 				}
+				.padding()
 			}
-			.padding([.leading,.trailing])
 		}
 		.onAppear {viewModel.getBudgets()}
 		.overlay(LoadingView(isLoading: $viewModel.isLoading))
 		.sheet(isPresented: $viewModel.addView) {
-			print("znikam")
+			viewModel.getBudgets()
+			viewModel.data = Budget.BudgetAPI()
 		}
 	content: {
 		NavigationView {
-			Text("Add")
+			AddView(budget: $viewModel.data)
 				.toolbar {
 					ToolbarItem(placement: .navigationBarLeading) {
 						Button("Dissmis") {
 							viewModel.addView.toggle()
 						}
 					}
-				}
-		}
-	}
-	.sheet(isPresented: $viewModel.predictView) {
-		NavigationView {
-			Text("Predict")
-				.toolbar {
-					ToolbarItem(placement: .navigationBarLeading) {
-						Button("Dissmis") {
-							viewModel.predictView.toggle()
+					ToolbarItem(placement: .navigationBarTrailing) {
+						Button("Add") {
+							viewModel.add()
+							viewModel.addView.toggle()
 						}
 					}
 				}
@@ -70,5 +69,23 @@ struct CategoryDetailView: View {
 struct CategoryDetailView_Previews: PreviewProvider {
 	static var previews: some View {
 		CategoryDetailView(viewModel: CategoryDetailViewModel(budgetType: BudgetType.budgetTypeMock))
+	}
+}
+
+
+struct AddView: View {
+	@Binding var budget: Budget.BudgetAPI
+	var body: some View {
+		VStack {
+			Text("Add new expense")
+				.font(.largeTitle)
+			TextField("Description", text: $budget.description)
+				.textFieldStyle(RoundedBorderTextFieldStyle())
+			TextField("Ammount", text: Binding(get: {String(budget.amount)}, set: {budget.amount = Int($0) ?? 0}))
+				.textFieldStyle(RoundedBorderTextFieldStyle())
+		}
+		.padding([.leading, .trailing])
+		.background {Image("p2")}
+		
 	}
 }
