@@ -43,7 +43,7 @@ extension Budget {
 
 extension Budget {
 	func createPieData() -> PieChartDataPoint {
-		return PieChartDataPoint(value: Double(self.amount), description: self.description, date: self.addedDate, colour: Color.random)
+		return PieChartDataPoint(value: Double(self.amount), description: self.description, date: self.addedDate, colour: Color.random, label: OverlayType.label(text: self.description))
 	}
 }
 

@@ -40,6 +40,11 @@ struct CategoryDetailView: View {
 			}
 		}
 		.onAppear {viewModel.getBudgets()}
+		.alert("Error", isPresented: $viewModel.showAlert) {
+			Button("Cancel",role: .cancel) {}
+		} message: {
+			Text(viewModel.error?.localizedDescription ?? "")
+		}
 		.overlay(LoadingView(isLoading: $viewModel.isLoading))
 		.sheet(isPresented: $viewModel.addView) {
 			viewModel.getBudgets()
@@ -47,7 +52,7 @@ struct CategoryDetailView: View {
 		}
 	content: {
 		NavigationView {
-			AddView(budget: $viewModel.data)
+			AddView(budget: $viewModel.data, type: viewModel.id)
 				.toolbar {
 					ToolbarItem(placement: .navigationBarLeading) {
 						Button("Dissmis") {
@@ -75,6 +80,10 @@ struct CategoryDetailView_Previews: PreviewProvider {
 
 struct AddView: View {
 	@Binding var budget: Budget.BudgetAPI
+	@State var isLoading: Bool = false
+	@State var showAlert: Bool = false
+	@State var error: Error?
+	let type: ID
 	var body: some View {
 		VStack {
 			Text("Add new expense")
@@ -84,7 +93,17 @@ struct AddView: View {
 			TextField("Ammount", text: Binding(get: {String(budget.amount)}, set: {budget.amount = Int($0) ?? 0}))
 				.textFieldStyle(RoundedBorderTextFieldStyle())
 			Button {
-				print("Następuje predykcja!")
+				Task {
+					isLoading = true
+					do {
+						let prediction = try await getPredictionforType(type, budget: budget)
+						print(prediction)
+					} catch let apiError {
+						error = apiError
+						showAlert = true
+					}
+					isLoading = false
+				}
 			} label: {
 				Text("Predicate")
 					.foregroundColor(.white)
@@ -93,6 +112,11 @@ struct AddView: View {
 					.background(RoundedRectangle(cornerRadius: 8).foregroundColor(.blue))
 			}
 			.padding(.top, 40)
+		}
+		.alert("Error", isPresented: $showAlert) {
+			Button("Cancel",role: .cancel) {}
+		} message: {
+			Text(error?.localizedDescription ?? "")
 		}
 		.padding([.leading, .trailing])
 		.background {Image("p2")}

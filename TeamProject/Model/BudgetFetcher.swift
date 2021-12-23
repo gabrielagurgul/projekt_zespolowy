@@ -52,8 +52,18 @@ func getUserExpensives() async throws -> [PLN] {
 	[-10.0, -5.1, -3.2]
 }
 
-func getPredictionforType(_ id: ID, budget: Budget) async throws -> Double {
-	return 0.8
+func getPredictionforType(_ id: ID, budget: Budget.BudgetAPI) async throws -> Double {
+	var urlRequest = try prepareUrlRequest(API.PUT.getPredictionByType + "\(id)", method: .PUT)
+	guard let data = try? JSONEncoder().encode(budget) else {
+		throw ApiError.invalidDataEncoding
+	}
+	urlRequest.httpBody = data
+	let (prediction, response) = try await session.data(for: urlRequest)
+	
+	guard let prediction = try? JSONDecoder().decode(Double.self, from: prediction) else {
+		throw ApiError.invalidDataDecoding
+	}
+	return prediction
 }
 
 enum REST: String {

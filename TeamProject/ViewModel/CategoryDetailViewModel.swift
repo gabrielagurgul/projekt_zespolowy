@@ -15,8 +15,15 @@ class CategoryDetailViewModel: ObservableObject {
 	@Published var predictView: Bool = false
 	@Published var budgets: [Budget] = []
 	@Published var isLoading: Bool = false
+	@Published var showAlert: Bool = false
+	@Published var error: Error?
 	@Published var data = Budget.BudgetAPI()
 	@Published var chartData: PieChartData = PieChartData(dataSets: PieDataSet(dataPoints: [], legendTitle: ""))
+	var id: ID {
+		get {
+			budgetType.id
+		}
+	}
 	
 	init (budgetType: BudgetType) {
 		self.budgetType = budgetType
@@ -28,8 +35,9 @@ class CategoryDetailViewModel: ObservableObject {
 			do {
 				budgets = try await getBudgetBy(budgetType.id).map { Budget.createBudget(from: $0)}
 				chartData = PieChartData(dataSets: PieDataSet(dataPoints: createChartFromBudget(), legendTitle: "wtf"))
-			} catch let error {
-				print(error.localizedDescription)
+			} catch let myError {
+				error = myError
+				showAlert = true
 			}
 			isLoading = false
 		}
@@ -40,10 +48,12 @@ class CategoryDetailViewModel: ObservableObject {
 			isLoading = true
 			do {
 				_ = try await addBudget(Budget.createBudget(from: data), category: REST.getCategoryById(id: budgetType.id))
-			} catch let error {
-				print(error.localizedDescription)
+			} catch let myError {
+				error = myError
+				showAlert = true
 			}
 			isLoading = false
+			getBudgets()
 		}
 		
 	}
