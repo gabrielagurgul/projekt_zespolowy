@@ -57,9 +57,10 @@ func getCash(from request: Money) async throws -> PLN {
 	return ammount
 }
 
-enum Money {
-	case LastSalary
-	case Budget
+enum Money: String {
+	
+	case LastSalary = "Month income"
+	case Budget = "Budget"
 	
 	var endPoint: String {
 		switch self {
