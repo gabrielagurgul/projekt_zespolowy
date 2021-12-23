@@ -48,8 +48,27 @@ func addUserSalary(ammount: PLN) async throws -> PLN {
 	return ammount
 }
 
-func getUserExpensives() async throws -> [PLN] {
-	[-10.0, -5.1, -3.2]
+func getCash(from request: Money) async throws -> PLN {
+	let urlRequest = try prepareUrlRequest(request.endPoint, method: .GET)
+	let (data,_) = try await session.data(for: urlRequest)
+	guard let ammount = try? JSONDecoder().decode(PLN.self, from: data) else {
+		throw ApiError.invalidDataDecoding
+	}
+	return ammount
+}
+
+enum Money {
+	case LastSalary
+	case Budget
+	
+	var endPoint: String {
+		switch self {
+		case .LastSalary:
+			return API.GET.lastSebastian
+		case .Budget:
+			return API.GET.availableCash
+		}
+	}
 }
 
 func getPredictionforType(_ id: ID, budget: Budget.BudgetAPI) async throws -> Double {
@@ -58,7 +77,7 @@ func getPredictionforType(_ id: ID, budget: Budget.BudgetAPI) async throws -> Do
 		throw ApiError.invalidDataEncoding
 	}
 	urlRequest.httpBody = data
-	let (prediction, response) = try await session.data(for: urlRequest)
+	let (prediction, _) = try await session.data(for: urlRequest)
 	
 	guard let prediction = try? JSONDecoder().decode(Double.self, from: prediction) else {
 		throw ApiError.invalidDataDecoding

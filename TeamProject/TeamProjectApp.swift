@@ -11,7 +11,8 @@ import SwiftUI
 struct TeamProjectApp: App {
     var body: some Scene {
         WindowGroup {
-            SalaryView()
+//			CategoryDetailView(viewModel: CategoryDetailViewModel(budgetType: BudgetType(id: 1, type: "Food", budget: nil)))
+			SalaryView()
         }
     }
 }
