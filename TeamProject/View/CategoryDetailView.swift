@@ -130,4 +130,3 @@ struct AddView: View {
 		
 	}
 }
-#imageLiteral(resourceName: "simulator_screenshot_4CD15803-412D-4996-A7E9-9ED93D47C770.png")
