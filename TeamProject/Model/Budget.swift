@@ -35,6 +35,7 @@ extension Budget {
 			print(error.localizedDescription)
 			date = Date()
 		}
+		date += 3600 // 
 		let ret =  Budget(id: Int.random(in: Int.min...Int.max - 1), description: budget.description, amount: budget.amount, addedDate: date)
 		return ret
 	}

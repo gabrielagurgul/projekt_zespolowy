@@ -82,6 +82,8 @@ struct AddView: View {
 	@Binding var budget: Budget.BudgetAPI
 	@State var isLoading: Bool = false
 	@State var showAlert: Bool = false
+	@State var showPrediction: Bool = false
+	@State var prediction: PLN?
 	@State var error: Error?
 	let type: ID
 	var body: some View {
@@ -96,8 +98,9 @@ struct AddView: View {
 				Task {
 					isLoading = true
 					do {
-						let prediction = try await getPredictionforType(type, budget: budget)
-						print(prediction)
+						prediction = try await getPredictionforType(type, budget: budget)
+						showPrediction = true
+						
 					} catch let apiError {
 						error = apiError
 						showAlert = true
@@ -118,8 +121,13 @@ struct AddView: View {
 		} message: {
 			Text(error?.localizedDescription ?? "")
 		}
+		.alert("Prediction", isPresented: $showPrediction) {
+		} message: {
+			Text("\(prediction ?? 0.0)")
+		}
 		.padding([.leading, .trailing])
 		.background {Image("p2")}
 		
 	}
 }
+#imageLiteral(resourceName: "simulator_screenshot_4CD15803-412D-4996-A7E9-9ED93D47C770.png")
